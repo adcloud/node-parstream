@@ -1,0 +1,18 @@
+{
+  "name": "parstream",
+  "description": "Client for parstreams JSON interface",
+  "version": "0.0.1",
+  "homepage": "http://github.com/teemow/node-parstream",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/teemow/node-parstream.git"
+  },
+  "author": "Timo Derstappen <teemow@gmail.com> (http://teemow.com)",
+  "main": "lib/parstream.js",
+  "directories": {
+    "lib": "."
+  },
+  "engines": {
+    "node": ">=0.4.3"
+  }
+}

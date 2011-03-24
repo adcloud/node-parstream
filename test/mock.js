@@ -15,7 +15,7 @@ Mock.create = function(port, cb) {
 
   var server = net.createServer(function(c) {
     var write = function(msg) {
-      c.write(msg + delimiter)
+      if (c.writable) c.write(msg + delimiter)
     }
     c.on('data', function(chunk) {
       chunk = chunk.toString()
@@ -30,6 +30,10 @@ Mock.create = function(port, cb) {
         }
       }
     })
+
+    setTimeout(function() {
+      c.end()
+    }, Math.random() * 10)
   })
   server.listen(port, '127.0.0.1', function() {
     cb(undefined, server, receivedCommands)

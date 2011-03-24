@@ -25,6 +25,8 @@ Mock.create = function(port, cb) {
 
         if (cmd === '{"sql_command":"select wage_id from Wages where wage_id=47"}') {
           write('{"rows":[{"row":{"wage_id":47}}],"rowcount":1}')
+        } else if (cmd === '{"parstream::OutputNode":{"fieldList":["wage_id"],"children":[{"parstream::FetchNode":{"fieldList":["wage_id"],"filter":"wage_id=47","tableName":"Wages","children":[],"alias":""}}],"format":"default","limit":0,"offset":0}}') {
+          write('{"rows":[{"row":{"wage_id":47}}],"rowcount":1}')
         } else {
           write('{"error" : "some error" }')
         }

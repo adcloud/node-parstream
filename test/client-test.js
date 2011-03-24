@@ -77,18 +77,33 @@ vows.describe("client")
           "select y_wage_id from Wages where wage_id=47", {
             'there should be an error': hasError()
           }
+        ),
+
+        // description tree
+        'and sends a description tree': query(parstream.node('output', {
+            fieldList: ["wage_id"],
+            children: [
+              parstream.node('fetch', {
+                fieldList: ["wage_id"],
+                filter: "wage_id=47",
+                tableName: "Wages"
+              })
+            ]
+          }), {
+            'there should be a resultset': hasResultset()
+          }
         )
       }
     }
   })
 .export(module)
 
-function query(sql, vows) {
+function query(query, vows) {
   var context = {
     topic: function(err, server, client, mockData) {
       var cb = this.callback
 
-      client.query(sql, function(err, data) {
+      client.query(query, function(err, data) {
         cb(err, data, server, client, mockData)
       })
     }
